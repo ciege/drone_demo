@@ -1,0 +1,12 @@
+version: '2'
+services:
+    devopsbingo-app:
+        image: devopsbingo
+        environment:
+            - SPRING_PROFILES_ACTIVE=container
+        ports:
+            - 8080:8080
+    devopsbingo-mysql:
+        extends:
+            file: mysql.yml
+            service: devopsbingo-mysql
