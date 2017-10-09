@@ -1,0 +1,19 @@
+task buildDocker(type: Exec) {
+    doFirst {
+        copy {
+            from "src/main/docker/"
+            into "build/docker/"
+            include "*"
+        }
+        copy {
+            from "build/libs"
+            into "build/docker/"
+            include "*.war*"
+        }
+    }
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        commandLine 'cmd', '/c', 'docker', 'image', 'build', '-f', 'build/docker/Dockerfile', '-t', 'devopsbingo', 'build/docker/'
+    } else {
+        commandLine 'docker', 'image', 'build', '-f', 'build/docker/Dockerfile', '-t', 'devopsbingo', 'build/docker/'
+    }
+}
