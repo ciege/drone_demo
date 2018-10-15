@@ -1,0 +1,9 @@
+pipeline:
+  gradle:
+    image: java:openjdk-7
+    environment:
+      - GRADLE_USER_HOME=~/.gradle
+    commands:
+      - ./gradlew clean
+      - ./gradlew build
+      - ./gradlew buildDocker
